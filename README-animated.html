@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhanush — GitHub Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --g:#00ff88;--gd:#00cc6a;--b:#58a6ff;--bd:#1a6fff;
+  --am:#f0883e;--pk:#f778ba;--pu:#bd93f9;
+  --bg0:#010409;--bg1:#0d1117;--bg2:#161b22;--bg3:#1c2128;
+  --br:#21262d;--tx:#c9d1d9;--txd:#6e7681;--txm:#8b949e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--tx);font-family:'Fira Code',monospace;overflow-x:hidden;min-height:100vh}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);pointer-events:none;z-index:999}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:40px 28px 60px}
+
+.win-bar{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--br);border-radius:14px 14px 0 0;padding:13px 18px}
+.dot{width:13px;height:13px;border-radius:50%;transition:transform .2s;cursor:default}
+.dot:hover{transform:scale(1.25)}
+.dot-r{background:#ff5f56}.dot-y{background:#ffbd2e}.dot-g{background:#27c93f}
+.win-title{margin-left:10px;color:var(--txd);font-size:12px;letter-spacing:.05em}
+.win-body{background:var(--bg1);border:1px solid var(--br);border-top:none;border-radius:0 0 14px 14px;padding:36px 36px 40px}
+
+.ascii-wrap{text-align:center;margin-bottom:28px;opacity:0;transform:translateY(-12px);animation:slideDown .8s ease forwards .1s}
+.ascii{font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.18;color:var(--g);display:inline-block;animation:glowPulse 3s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 14px rgba(0,255,136,.5)}50%{text-shadow:0 0 32px rgba(0,255,136,.95),0 0 70px rgba(0,255,136,.3)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.typing-sub{text-align:center;font-size:14px;color:var(--b);margin-bottom:36px;min-height:22px;opacity:0;animation:fadeIn .5s ease forwards .9s}
+.tcursor{display:inline-block;width:2px;height:14px;background:var(--b);vertical-align:middle;margin-left:2px;animation:blink .8s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.sec{margin-bottom:36px;opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.sec.vis{opacity:1;transform:translateY(0)}
+
+.cmd-row{display:flex;align-items:center;margin-bottom:14px}
+.pr{color:var(--g);font-size:13px;white-space:nowrap}
+.pc{color:var(--b);font-size:13px}
+.pa{color:var(--am);font-size:13px}
+
+hr.dv{border:none;border-top:1px solid var(--br);margin:32px 0}
+
+.about-box{border:1px solid var(--br);border-left:3px solid var(--g);background:linear-gradient(135deg,var(--bg2),var(--bg3));border-radius:0 10px 10px 0;padding:18px 22px;position:relative;overflow:hidden}
+.about-box::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(0,255,136,.05),transparent 70%);pointer-events:none}
+.arow{display:grid;grid-template-columns:80px 28px 1fr;align-items:center;padding:4px 0;font-size:13px;line-height:1.9}
+.ak{color:var(--txd)}.aa{color:var(--g)}.av{color:var(--tx)}
+.av.g{color:var(--g)}.av.b{color:var(--b)}.av.am{color:var(--am)}.av.pk{color:var(--pk)}.av.pu{color:var(--pu)}
+
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pcard{border:1px solid var(--br);background:var(--bg2);border-radius:12px;padding:20px;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;cursor:default}
+.pcard::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,255,136,.07),transparent 60%);opacity:0;transition:opacity .3s}
+.pcard:hover{border-color:var(--g);transform:translateY(-5px);box-shadow:0 10px 35px rgba(0,255,136,.12)}
+.pcard:hover::before{opacity:1}
+.pcard:nth-child(2):hover{border-color:var(--pk);box-shadow:0 10px 35px rgba(247,120,186,.12)}
+.pcard:nth-child(2)::before{background:radial-gradient(circle at 50% 0%,rgba(247,120,186,.07),transparent 60%)}
+.picon{font-size:26px;margin-bottom:10px;display:block;transition:transform .3s}
+.pcard:hover .picon{transform:scale(1.12) rotate(-5deg)}
+.pname{color:var(--b);font-size:13px;font-weight:600;margin-bottom:6px}
+.pcard:nth-child(2) .pname{color:var(--pk)}
+.pdesc{color:var(--txm);font-size:11px;line-height:1.7;margin-bottom:12px}
+.badge{display:inline-block;font-size:10px;padding:3px 10px;border-radius:5px;font-weight:600;letter-spacing:.06em}
+.badge-b{background:rgba(240,136,62,.12);color:var(--am);border:1px solid rgba(240,136,62,.25)}
+.badge-a{background:rgba(0,255,136,.1);color:var(--g);border:1px solid rgba(0,255,136,.2);position:relative;padding-left:16px}
+.badge-a::before{content:'';position:absolute;left:5px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:translateY(-50%) scale(1)}50%{opacity:.3;transform:translateY(-50%) scale(.5)}}
+
+.prog-item{margin-bottom:20px}
+.prog-hd{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;align-items:center}
+.prog-lbl{color:var(--tx);display:flex;align-items:center;gap:8px}
+.prog-pct{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+.pct-g{color:var(--g);background:rgba(0,255,136,.1)}
+.pct-am{color:var(--am);background:rgba(240,136,62,.1)}
+.pct-b{color:var(--b);background:rgba(88,166,255,.1)}
+.pct-pk{color:var(--pk);background:rgba(247,120,186,.1)}
+.prog-track{height:9px;background:var(--bg3);border-radius:5px;border:1px solid var(--br);overflow:hidden;position:relative}
+.prog-fill{height:100%;border-radius:5px;width:0%;transition:width 1.8s cubic-bezier(.4,0,.2,1);position:relative}
+.prog-fill::after{content:'';position:absolute;top:0;right:0;bottom:0;width:30px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));animation:shim 2.2s ease-in-out infinite}
+@keyframes shim{0%,100%{opacity:0}50%{opacity:1}}
+.fg{background:linear-gradient(90deg,var(--gd),var(--g));box-shadow:0 0 12px rgba(0,255,136,.45)}
+.fam{background:linear-gradient(90deg,#c86f20,var(--am));box-shadow:0 0 12px rgba(240,136,62,.45)}
+.fb{background:linear-gradient(90deg,var(--bd),var(--b));box-shadow:0 0 12px rgba(88,166,255,.45)}
+.fpk{background:linear-gradient(90deg,#c4519a,var(--pk));box-shadow:0 0 12px rgba(247,120,186,.45)}
+
+.skill-sec{margin-bottom:16px}
+.skill-lbl{font-size:10px;color:var(--txd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:11px;padding:5px 14px;border-radius:20px;border:1px solid;transition:all .25s;cursor:default;opacity:0;animation:tagPop .4s cubic-bezier(.34,1.56,.64,1) both}
+.tag:hover{transform:translateY(-2px) scale(1.07)}
+@keyframes tagPop{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
+.tg{color:var(--g);border-color:rgba(0,255,136,.25);background:rgba(0,255,136,.05)}
+.tg:hover{background:rgba(0,255,136,.13);box-shadow:0 0 14px rgba(0,255,136,.22)}
+.tb{color:var(--b);border-color:rgba(88,166,255,.25);background:rgba(88,166,255,.05)}
+.tb:hover{background:rgba(88,166,255,.13);box-shadow:0 0 14px rgba(88,166,255,.22)}
+.tam{color:var(--am);border-color:rgba(240,136,62,.25);background:rgba(240,136,62,.05)}
+.tam:hover{background:rgba(240,136,62,.13);box-shadow:0 0 14px rgba(240,136,62,.22)}
+.tpu{color:var(--pu);border-color:rgba(189,147,249,.25);background:rgba(189,147,249,.05)}
+.tpu:hover{background:rgba(189,147,249,.13);box-shadow:0 0 14px rgba(189,147,249,.22)}
+
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.scard{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:16px;text-align:center;transition:all .3s;cursor:default;position:relative;overflow:hidden}
+.scard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:currentColor;transform:scaleX(0);transition:transform .35s}
+.scard:hover{transform:translateY(-4px)}.scard:hover::after{transform:scaleX(1)}
+.snum{font-size:28px;font-weight:700;display:block;margin-bottom:4px}
+.slabel{font-size:10px;color:var(--txd);letter-spacing:.06em}
+.sc1{color:var(--g)}.sc2{color:var(--b)}.sc3{color:var(--am)}.sc4{color:var(--pk)}
+.scard .snum{text-shadow:0 0 18px currentColor;animation:numIn .8s ease both}
+@keyframes numIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.scard:hover{box-shadow:0 8px 30px rgba(0,0,0,.3)}
+
+.conn-row{display:flex;gap:14px;flex-wrap:wrap}
+.cbtn{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border-radius:10px;font-family:'Fira Code',monospace;font-size:13px;font-weight:500;text-decoration:none;border:1px solid;transition:all .25s}
+.cbtn:hover{transform:translateY(-2px)}
+.cbtn-g{color:var(--g);border-color:rgba(0,255,136,.25);background:rgba(0,255,136,.05)}
+.cbtn-g:hover{background:rgba(0,255,136,.13);box-shadow:0 0 22px rgba(0,255,136,.22),0 4px 20px rgba(0,255,136,.1)}
+.cbtn-b{color:var(--b);border-color:rgba(88,166,255,.25);background:rgba(88,166,255,.05)}
+.cbtn-b:hover{background:rgba(88,166,255,.13);box-shadow:0 0 22px rgba(88,166,255,.22),0 4px 20px rgba(88,166,255,.1)}
+
+.footer{text-align:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--br)}
+.ftr-p{font-size:14px;color:var(--txd)}
+.ftr-cur{display:inline-block;width:9px;height:15px;background:var(--g);animation:blink .8s step-end infinite;vertical-align:middle;margin-left:2px;box-shadow:0 0 10px var(--g)}
+.ftr-s{font-size:12px;color:var(--txd);margin-top:10px}
+.ftr-s span{color:var(--g)}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="wrap">
+  <div class="win-bar">
+    <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+    <span class="win-title">dpincodeing@github — zsh — 140×42</span>
+  </div>
+  <div class="win-body">
+
+    <div class="ascii-wrap">
+      <pre class="ascii">
+██████╗ ██╗  ██╗ █████╗ ███╗   ██╗██╗   ██╗███████╗██╗  ██╗
+██╔══██╗██║  ██║██╔══██╗████╗  ██║██║   ██║██╔════╝██║  ██║
+██║  ██║███████║███████║██╔██╗ ██║██║   ██║███████╗███████║
+██║  ██║██╔══██║██╔══██║██║╚██╗██║██║   ██║╚════██║██╔══██║
+██████╔╝██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████║██║  ██║
+╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝</pre>
+    </div>
+
+    <div class="typing-sub" id="typer"><span class="tcursor"></span></div>
+
+    <div class="sec" id="s0">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">whoami</span></div>
+      <div class="about-box">
+        <div class="arow"><span class="ak">name</span><span class="aa">→</span><span class="av g">dhanush p.</span></div>
+        <div class="arow"><span class="ak">role</span><span class="aa">→</span><span class="av">final year cs undergrad</span></div>
+        <div class="arow"><span class="ak">domain</span><span class="aa">→</span><span class="av b">robotics · embedded systems · nlp</span></div>
+        <div class="arow"><span class="ak">sport</span><span class="aa">→</span><span class="av am">⚽ footballer — strength &amp; explosive play</span></div>
+        <div class="arow"><span class="ak">web</span><span class="aa">→</span><span class="av pk">exploring web 3.0 &amp; semantic web</span></div>
+        <div class="arow"><span class="ak">status</span><span class="aa">→</span><span class="av pu">building things that shouldn't exist</span></div>
+      </div>
+    </div>
+
+    <hr class="dv"/>
+
+    <div class="sec" id="s1">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">ls</span><span class="pa">&nbsp;-la projects/</span></div>
+      <div class="proj-grid">
+        <div class="pcard">
+          <span class="picon">🤖</span>
+          <div class="pname">wall-climbing-robot</div>
+          <div class="pdesc">Suction + servo control. Autonomous vertical navigation on flat surfaces. Hardware prototype in progress.</div>
+          <span class="badge badge-b">BUILDING &amp; TESTING</span>
+        </div>
+        <div class="pcard">
+          <span class="picon">🧠</span>
+          <div class="pname">sms-spam-detection</div>
+          <div class="pdesc">NLP pipeline · vectorisation · classifier training. Real-time filtering with high precision recall.</div>
+          <span class="badge badge-a">ACTIVE DEVELOPMENT</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dv"/>
+
+    <div class="sec" id="s2">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">./progress.sh</span><span class="pa">&nbsp;--verbose</span></div>
+      <div class="prog-item">
+        <div class="prog-hd"><span class="prog-lbl"><span>🤖</span>wall-climbing-robot</span><span class="prog-pct pct-g">60%</span></div>
+        <div class="prog-track"><div class="prog-fill fg" data-w="60"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-hd"><span class="prog-lbl"><span>🧠</span>sms-spam-detection</span><span class="prog-pct pct-am">45%</span></div>
+        <div class="prog-track"><div class="prog-fill fam" data-w="45"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-hd"><span class="prog-lbl"><span>🌐</span>web-3.0-research</span><span class="prog-pct pct-b">25%</span></div>
+        <div class="prog-track"><div class="prog-fill fb" data-w="25"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-hd"><span class="prog-lbl"><span>⚽</span>football-season</span><span class="prog-pct pct-pk">100%</span></div>
+        <div class="prog-track"><div class="prog-fill fpk" data-w="100"></div></div>
+      </div>
+    </div>
+
+    <hr class="dv"/>
+
+    <div class="sec" id="s3">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">cat skills.json</span><span class="pa">&nbsp;| jq .</span></div>
+      <div class="skill-sec">
+        <div class="skill-lbl">languages</div>
+        <div class="tags">
+          <span class="tag tg">C</span><span class="tag tg">C++</span><span class="tag tg">Python</span><span class="tag tg">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-sec" style="margin-top:14px">
+        <div class="skill-lbl">domains</div>
+        <div class="tags">
+          <span class="tag tb">Robotics</span><span class="tag tb">Embedded Systems</span><span class="tag tb">NLP</span><span class="tag tb">Web 3.0</span>
+        </div>
+      </div>
+      <div class="skill-sec" style="margin-top:14px">
+        <div class="skill-lbl">tools</div>
+        <div class="tags">
+          <span class="tag tam">Arduino</span><span class="tag tam">ROS</span><span class="tag tam">scikit-learn</span><span class="tag tam">NLTK</span>
+        </div>
+      </div>
+      <div class="skill-sec" style="margin-top:14px">
+        <div class="skill-lbl">lifestyle</div>
+        <div class="tags">
+          <span class="tag tpu">⚽ Footballer</span><span class="tag tpu">Strength Training</span><span class="tag tpu">Hybrid Athlete</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dv"/>
+
+    <div class="sec" id="s4">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">git log</span><span class="pa">&nbsp;--stat --global</span></div>
+      <div class="stat-grid">
+        <div class="scard sc1"><span class="snum">2</span><span class="slabel">live projects</span></div>
+        <div class="scard sc2"><span class="snum">4</span><span class="slabel">languages</span></div>
+        <div class="scard sc3"><span class="snum">∞</span><span class="slabel">hours on pitch</span></div>
+        <div class="scard sc4"><span class="snum">1</span><span class="slabel">year remaining</span></div>
+      </div>
+    </div>
+
+    <hr class="dv"/>
+
+    <div class="sec" id="s5">
+      <div class="cmd-row"><span class="pr">dpincodeing@github:~$&nbsp;</span><span class="pc">./connect.sh</span><span class="pa">&nbsp;--open-all</span></div>
+      <div class="conn-row">
+        <a class="cbtn cbtn-g" href="mailto:dpincodeing@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          dpincodeing@gmail.com
+        </a>
+        <a class="cbtn cbtn-b" href="https://linkedin.com/in/dhanush" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          linkedin / dhanush
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="ftr-p">[ dpincodeing@github ~ ] $<span class="ftr-cur"></span></div>
+      <div class="ftr-s">keep building. keep playing. <span>⚽</span></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+const COLS = Math.floor(W / 18);
+const drops = Array.from({length: COLS}, () => Math.random() * -60);
+const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]|/\\';
+
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(1,4,9,0.055)';
+  ctx.fillRect(0, 0, W, H);
+  ctx.font = '13px Fira Code';
+  drops.forEach((y, i) => {
+    const a = Math.random() * 0.55 + 0.08;
+    ctx.fillStyle = `rgba(0,255,136,${a})`;
+    ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 18, y * 18);
+    if (y * 18 > H && Math.random() > 0.975) drops[i] = 0;
+    drops[i] += 0.5;
+  });
+}
+setInterval(drawMatrix, 55);
+
+/* floating orbs */
+const orbs = Array.from({length: 8}, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: Math.random() * 120 + 60,
+  vx: (Math.random() - 0.5) * 0.15,
+  vy: (Math.random() - 0.5) * 0.15,
+  c: ['rgba(0,255,136,','rgba(88,166,255,','rgba(247,120,186,','rgba(240,136,62,'][Math.floor(Math.random()*4)]
+}));
+function drawOrbs() {
+  orbs.forEach(o => {
+    const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+    g.addColorStop(0, o.c + '0.03)');
+    g.addColorStop(1, o.c + '0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+    ctx.fill();
+    o.x += o.vx; o.y += o.vy;
+    if (o.x < 0 || o.x > W) o.vx *= -1;
+    if (o.y < 0 || o.y > H) o.vy *= -1;
+  });
+}
+setInterval(drawOrbs, 55);
+
+/* typing */
+const lines = ['Final Year CSE Student 🎓','Robotics & Embedded Systems 🤖','NLP Enthusiast 🧠','Footballer ⚽','Building things that shouldn\'t exist...'];
+let li = 0, ci = 0, del = false;
+const typer = document.getElementById('typer');
+function type() {
+  const cur = lines[li];
+  if (!del) {
+    ci++;
+    typer.innerHTML = cur.slice(0, ci) + '<span class="tcursor"></span>';
+    if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
+    setTimeout(type, 55);
+  } else {
+    ci--;
+    typer.innerHTML = cur.slice(0, ci) + '<span class="tcursor"></span>';
+    if (ci === 0) { del = false; li = (li + 1) % lines.length; setTimeout(type, 350); return; }
+    setTimeout(type, 28);
+  }
+}
+setTimeout(type, 1100);
+
+/* intersection observer */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.sec').forEach((s, i) => {
+  s.style.transitionDelay = i * 0.05 + 's';
+  io.observe(s);
+});
+
+/* progress bars */
+setTimeout(() => {
+  document.querySelectorAll('.prog-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+}, 800);
+
+/* tag stagger */
+document.querySelectorAll('.tag').forEach((t, i) => { t.style.animationDelay = (0.9 + i * 0.055) + 's'; });
+
+/* stat card hover glow */
+document.querySelectorAll('.scard').forEach(c => {
+  c.addEventListener('mouseenter', () => { c.style.boxShadow = `0 8px 32px ${getComputedStyle(c).color}33`; });
+  c.addEventListener('mouseleave', () => { c.style.boxShadow = ''; });
+});
+</script>
+</body>
+</html>

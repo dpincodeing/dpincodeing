@@ -1,17 +1,17 @@
 <div align="center">
 
 ```
-██████╗ ██╗  ██╗ █████╗ ███╗   ██╗██╗   ██╗███████╗██╗  ██╗
-██╔══██╗██║  ██║██╔══██╗████╗  ██║██║   ██║██╔════╝██║  ██║
-██║  ██║███████║███████║██╔██╗ ██║██║   ██║███████╗███████║
-██║  ██║██╔══██║██╔══██║██║╚██╗██║██║   ██║╚════██║██╔══██║
-██████╔╝██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████║██║  ██║
-╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+    .___.__                                    .__ 
+  __| _/|  |__  _____     ____   __ __   ______|  |__ 
+ / __ | |  |  \ \__  \   /    \ |  |  \ /  ___/|  |  \
+/ /_/ | |   Y  \ / __ \_|   |  \|  |  / \___ \ |   Y  \
+\____ | |___|  /(____  /|___|  /|____/ /____  >|___|  /
+     \/      \/      \/      \/             \/      \/
 ```
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1000&color=00FF88&center=true&vCenter=true&width=650&lines=Final+Year+CSE+Student+%F0%9F%8E%93;Robotics+%26+Embedded+Systems+%F0%9F%A4%96;NLP+Enthusiast+%F0%9F%A7%A0;Footballer+%E2%9A%BD;Building+things+that+shouldn%27t+exist...)](https://git.io/typing-svg)
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=00FF88&height=3&section=header&reversal=false" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=00FF88&height=60&section=header" width="100%"/>
 
 </div>
 
@@ -42,8 +42,10 @@ $ ls -la projects/
 
 | &nbsp; | project | description | status |
 |:---:|:---|:---|:---:|
-| 🤖 | **wall-climbing-robot** | Suction + servo control. Autonomous vertical navigation on flat surfaces | ![Building](https://img.shields.io/badge/BUILDING_%26_TESTING-f0883e?style=flat-square&logoColor=white) |
+| 🤖 | **wall-climbing-robot** | Suction + servo control. Autonomous vertical navigation on flat surfaces | ![Building](https://img.shields.io/badge/BUILDING_%26_TESTING-f0883e?style=flat-square) |
 | 🧠 | **sms-spam-detection** | NLP pipeline · vectorisation · classifier training · real-time filtering | ![Active](https://img.shields.io/badge/ACTIVE_DEVELOPMENT-00ff88?style=flat-square&logoColor=black) |
+| 🐾 | **animal-emergency-response** | Emergency coordination platform for NGOs · real-time rescue dispatch & triage | ![Done](https://img.shields.io/badge/COMPLETED-6e40c9?style=flat-square) |
+| 🔀 | **llm-aggregator** | Unified interface aggregating multiple LLMs · compare, route & benchmark models | ![60](https://img.shields.io/badge/60%25_DONE-58a6ff?style=flat-square) |
 
 </div>
 
@@ -54,11 +56,27 @@ $ ./progress.sh --verbose
 ```
 
 ```
-🤖  wall-climbing-robot   ████████████░░░░░░░░  60%  [BUILDING]
-🧠  sms-spam-detection    █████████░░░░░░░░░░░  45%  [TRAINING]
-🌐  web-3.0-research      █████░░░░░░░░░░░░░░░  25%  [EXPLORING]
-⚽  football-season       ████████████████████ 100%  [ALWAYS ON]
+🤖  wall-climbing-robot        ████████████░░░░░░░░  60%  [BUILDING]
+🧠  sms-spam-detection         █████████░░░░░░░░░░░  45%  [TRAINING]
+🌐  web-3.0-research           █████░░░░░░░░░░░░░░░  25%  [EXPLORING]
+🐾  animal-emergency-response  ████████████████████ 100%  [SHIPPED ✓]
+🔀  llm-aggregator             ████████████░░░░░░░░  60%  [IN PROGRESS]
+⚽  football-season            ████████████████████ 100%  [ALWAYS ON]
 ```
+
+---
+
+```bash
+$ cat project-details/animal-emergency-response/README
+```
+
+> 🐾 **Animal Emergency Response** — Built for NGOs handling animal rescues. Features real-time case intake, volunteer dispatch, triage severity scoring, and location-based coordination. Fully operational and deployed.
+
+```bash
+$ cat project-details/llm-aggregator/README
+```
+
+> 🔀 **LLM Aggregator** — A unified dashboard to query, compare and route across multiple LLMs (GPT, Claude, Gemini, Mistral etc). Benchmarks responses side-by-side. 60% complete — routing engine done, UI in progress.
 
 ---
 
@@ -84,9 +102,9 @@ $ cat skills.json | jq .
 
 **⬡ Lifestyle**
 
-![Football](https://img.shields.io/badge/⚽_Footballer-1a1a2e?style=for-the-badge&logoColor=white)
-![Strength](https://img.shields.io/badge/Strength_Training-1a1a2e?style=for-the-badge&logoColor=white)
-![Hybrid](https://img.shields.io/badge/Hybrid_Athlete-1a1a2e?style=for-the-badge&logoColor=white)
+![Football](https://img.shields.io/badge/⚽_Footballer-1a1a2e?style=for-the-badge)
+![Strength](https://img.shields.io/badge/Strength_Training-1a1a2e?style=for-the-badge)
+![Hybrid](https://img.shields.io/badge/Hybrid_Athlete-1a1a2e?style=for-the-badge)
 
 </div>
 
@@ -115,8 +133,8 @@ $ ./connect.sh --open-all
 
 <div align="center">
 
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dpincodeing@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/dhanush)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dhanushp217@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhanush-p-62766228a)
 
 </div>
 
